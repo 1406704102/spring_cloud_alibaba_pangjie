@@ -1,0 +1,38 @@
+server:
+  port: 8071
+spring:
+  application:
+    name: service-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 139.155.84.163:8848
+      config:
+        fileExtension: yaml
+        server-addr: 139.155.84.163:8848
+        namespace: a486e9d7-d97e-4e4d-a7ae-55a36e40dfd6
+        sharedConfigs[0]:
+          data-id: db.yaml
+          group: USER_GROUP
+          refresh: true
+        sharedConfigs[1]:
+          data-id: jpa-share.yaml
+          group: DEFAULT_GROUP
+          refresh: true
+        sharedConfigs[2]:
+          data-id: sleuth.yaml
+          group: DEFAULT_GROUP
+          refresh: true
+        sharedConfigs[3]:
+          data-id: zipkin.yaml
+          group: ZIPKIN_GROUP
+          refresh: true
+        sharedConfigs[4]:
+          data-id: sleuth.yaml
+          group: SLEUTH_GROUP
+          refresh: true
+    sentinel:
+      #      取消懒加载
+      eager: true
+      transport:
+        dashboard: 127.0.0.1:8858

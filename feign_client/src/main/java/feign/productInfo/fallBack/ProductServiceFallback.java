@@ -1,4 +1,4 @@
-package feign.productInfo.client;
+package feign.productInfo.fallBack;
 
 import com.domain.Product;
 import com.result.Result;
@@ -11,14 +11,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductServiceFallback implements FallbackFactory<ProductServiceFeign> {
     @Override
-    public ProductServiceFeign create(Throwable cause) {
+    public ProductServiceFeign create(Throwable throwable) {
         return new ProductServiceFeign() {
             @Override
             public Result<Product> findById(Integer id) {
-                Product product = new Product();
-                product.setId(-1);
                 return ResultUtil.notFound();
             }
+
+            @Override
+            public Result<Product> findByName(String name) {
+                return ResultUtil.notFound();
+            }
+
         };
     }
 }

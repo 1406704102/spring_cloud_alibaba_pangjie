@@ -1,0 +1,76 @@
+server:
+  port: 8072
+spring:
+  application:
+    name: service-product
+  #  datasource:
+  #    driver-class-name: com.mysql.cj.jdbc.Driver #版本看自己数据库版本安装
+  #    url: jdbc:mysql://139.155.84.163:3306/shop?serverTimezone=UTC&useUnicode=true&characterEncoding=utf-8&userSSL=true
+  #    username: root
+  #    password: root_pangjie
+  #  jpa:
+  #    hibernate:
+  #      hb2ddl:
+  #        auto: update
+  #        dialect: org.hibernate.dialect.MySQL5InnoDBialect
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 139.155.84.163:8848
+      config:
+        fileExtension: yaml
+        server-addr: 139.155.84.163:8848
+        namespace: a486e9d7-d97e-4e4d-a7ae-55a36e40dfd6
+        sharedConfigs[0]:
+          data-id: db.yaml
+          group: PRODUCT_GROUP
+          refresh: true
+        sharedConfigs[1]:
+          data-id: jpa-share.yaml
+          group: DEFAULT_GROUP
+          refresh: true
+        sharedConfigs[2]:
+          data-id: sleuth.yaml
+          group: DEFAULT_GROUP
+          refresh: true
+        sharedConfigs[3]:
+          data-id: zipkin.yaml
+          group: ZIPKIN_GROUP
+          refresh: true
+        sharedConfigs[4]:
+          data-id: sleuth.yaml
+          group: SLEUTH_GROUP
+          refresh: true
+    sentinel:
+      #      取消懒加载
+      eager: true
+      transport:
+        dashboard: 127.0.0.1:8858
+      # nacos配置持久化
+      #  [
+      #    {
+      #      "resource": "/api/v1/sentinel/test-sentinel",
+      #      "limitApp": "default",
+      #      "grade": "1",
+      #      "count": "5",
+      #      "strategy": "0",
+      #      "controlBehavior": "0",
+      #      "clusterMode": false
+      #    }
+      #  ]
+      #      resource：资源名称
+      #      limitApp：来源应用
+      #      grade：阀值类型，0：线程数，1：QPS
+      #      count：单机阀值
+      #      strategy：流控模式，0：直接，1：关联，2：链路
+      #      controlBehavior：流控效果，0：快速失败，1：warmUp，2：排队等待
+      #      clusterMode：是否集群
+      datasource:
+        ds1:
+          nacos:
+            server-addr: 139.155.84.163:8848
+            namespace: a486e9d7-d97e-4e4d-a7ae-55a36e40dfd6
+            dataId: ${spring.application.name}-SENTINEL.json
+            groupId: SENTINEL_GROUP
+            data-type: json
+            rule-type: flow

@@ -1,0 +1,31 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 139.155.84.163:8848
+      config:
+        fileExtension: yaml
+        server-addr: 139.155.84.163:8848
+        namespace: a486e9d7-d97e-4e4d-a7ae-55a36e40dfd6
+        sharedConfigs[0]:
+          data-id: gateway_route.yaml
+          group: GATEWAY_GROUP
+          refresh: true
+#    gateway:
+#      routes: #数组形式
+#        - id: product_route  #路由唯一标识
+#          uri: lb://service-product  #想要转发到的地址
+##          uri: http://127.0.0.1:8072  #想要转发到的地址
+#          order: 1 #优先级，数字越小优先级越高
+#          predicates: #断言 配置哪个路径才转发
+#            - Path=/api/product_route/**
+#            #- Before=2023-04-11T01:01:01.000+08:00  # 在这个时间点之后不能访问
+#            #- Query=source  #一定携带这个参数
+#          filters: #过滤器，请求在传递过程中通过过滤器修改
+#            - StripPrefix=2  #去掉第一层前缀
+##            - RewritePath=/api/?(?<segment>.*), /$\{segment} #把" /api/** 重写成 / "

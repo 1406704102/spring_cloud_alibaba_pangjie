@@ -2,10 +2,12 @@ package com.ppj.orderInfo.controller;
 
 import com.domain.Order;
 import com.domain.Product;
+import com.domain.User;
 import com.ppj.orderInfo.service.OrderService;
 import com.result.Result;
 import com.result.ResultUtil;
 import feign.productInfo.client.ProductServiceFeign;
+import feign.userInfo.client.UserServiceFeign;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,14 +27,15 @@ public class OrderController {
     private final RestTemplate restTemplate;
     private final OrderService orderService;
     private final ProductServiceFeign productServiceFeign;
+    private final UserServiceFeign userServiceFeign;
 
-    @RequestMapping("/prod/{id}")
-    public Result<Order> order(@PathVariable("id") Integer id){
+    @RequestMapping("/prod/{userId}/{id}")
+    public Result<Order> order(@PathVariable("userId") Integer userId, @PathVariable("id") Integer id){
         log.info("接收{}号商品下单", id);
 //        Product product = restTemplate.getForObject("http://service-product/product/" + id, Product.class);
         Product product = productServiceFeign.findById(id).getData();
-        if (product != null) {
-
+        User user = userServiceFeign.findById(userId).getData();
+        if (product.getId() != null && user.getId() != null) {
             log.info("查询到{}商品的信息是{}", id, product);
             //创建订单
             Order order = new Order();
@@ -41,7 +44,7 @@ public class OrderController {
             order.setProductName(product.getProductName());
             order.setProductPrice(product.getProductPrice());
             order.setProductNumber(1);
-            order.setUserId(1);
+            order.setUserId(userId);
             order = orderService.create(order);
             log.info("下单{}号成功,订单信息{}", id, order);
             return ResultUtil.success(order);

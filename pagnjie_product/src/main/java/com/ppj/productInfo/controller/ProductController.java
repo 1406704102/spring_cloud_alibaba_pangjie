@@ -1,5 +1,6 @@
 package com.ppj.productInfo.controller;
 
+//import com.domain.Product;
 import com.domain.Product;
 import com.ppj.productInfo.service.ProductService;
 import com.result.Result;
