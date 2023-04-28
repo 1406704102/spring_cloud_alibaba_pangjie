@@ -4,6 +4,7 @@ import com.domain.Product;
 import com.result.Result;
 import feign.productInfo.fallBack.ProductServiceFallback;
 import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 

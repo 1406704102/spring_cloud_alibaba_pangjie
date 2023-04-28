@@ -21,10 +21,10 @@ public class ProductController {
     private final ProductService productService;
 
     @RequestMapping("/{id}")
-    public Result<Product> product(@PathVariable("id") Integer id){
+    public Result<Object> product(@PathVariable("id") Integer id){
         log.info("查询{}号商品", id);
         Product product =productService.findById(id);
         log.info("查询成功{}", product);
-        return ResultUtil.success(product);
+        return ResultUtil.data(product);
     }
 }

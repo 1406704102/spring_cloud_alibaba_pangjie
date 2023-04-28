@@ -1,0 +1,9 @@
+server:
+  port: 8070
+spring:
+  application:
+    name: service-auth
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 139.155.84.163:8848

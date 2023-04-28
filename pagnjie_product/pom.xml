@@ -23,15 +23,18 @@
             <artifactId>common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!-- nacos-->
+
+        <!--fegin_clien-->
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+            <groupId>org.pangjie</groupId>
+            <artifactId>feign_client</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
-        <!--容错sentinel-->
+
         <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-sentinel</artifactId>
+            <groupId>org.pangjie</groupId>
+            <artifactId>pom</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
 </project>

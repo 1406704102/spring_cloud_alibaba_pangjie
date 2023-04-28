@@ -16,7 +16,7 @@ package com.result;
  * 600 UN_KNOW_ERROR - 未知错误
  * ----------------------------------------------------------------------------
  */
-public enum HttpCodeEnum {
+public enum ResultCode {
 
     OK(200,"操作成功"),
     INVALID_REQUEST(400,"参数错误"),
@@ -40,7 +40,7 @@ public enum HttpCodeEnum {
     private final int code;
     private final String message;
 
-    HttpCodeEnum(final int code, final String message){
+    ResultCode(final int code, final String message){
         this.code=code;
         this.message=message;
     }

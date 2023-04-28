@@ -6,6 +6,8 @@ import com.result.Result;
 import com.result.ResultUtil;
 import feign.hystrix.FallbackFactory;
 import feign.userInfo.client.UserServiceFeign;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -16,8 +18,15 @@ public class UserServiceFallBack implements FallbackFactory<UserServiceFeign> {
         return new UserServiceFeign() {
             @Override
             public Result<User> findById(Integer id) {
-                return ResultUtil.notFound();
+                return ResultUtil.error();
             }
+
+            @Override
+            public Result<User> findByUsername(String username) {
+                return ResultUtil.error();
+            }
+
+
         };
     }
 }
