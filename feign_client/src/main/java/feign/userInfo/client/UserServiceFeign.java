@@ -12,5 +12,5 @@ public interface UserServiceFeign {
     @RequestMapping("/user/{id}")
     Result<User> findById(@PathVariable Integer id);
     @RequestMapping("/user/findByUsername")
-    Result<User> findByUsername(String username);
+    Result<User> findByUsername(@RequestParam(value = "username") String username);
 }

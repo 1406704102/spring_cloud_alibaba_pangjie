@@ -12,11 +12,6 @@
     <artifactId>pagnjie_product</artifactId>
 
     <dependencies>
-        <!--springboot-web-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
         <!--common-->
         <dependency>
             <groupId>org.pangjie</groupId>
